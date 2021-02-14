@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fitness
+spec:
+  containers:
+  - name: fitness
+    image: fitness-dev
+    stdin: true
+    tty: true
+

@@ -1,0 +1,31 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+build:
+  artifacts:
+    - image: fitness-dev
+      sync:
+        infer:
+          - 'app/**/*'
+          - 'config/**/*'
+          - 'db/**/*'
+          - 'lib/**/*'
+          - 'vendor/**/*'
+          - 'babel.config.js'
+          - 'config.ru'
+          - 'postcss.config.js'
+          - 'Rakefile'
+
+          # Sync these so changes can be applied manually
+          - 'Gemfile'
+          - 'Gemfile.lock'
+          - 'package.json'
+          - 'yarn.lock'
+portForward:
+  - resourceType: pod
+    resourceName: fitness
+    namespace: default
+    port: 3000
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/*
