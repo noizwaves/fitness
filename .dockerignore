@@ -8,6 +8,8 @@ log
 tmp
 !tmp/.keep
 
+db/development.sqlite3
+
 Dockerfile
 .tool-versions
 .idea
