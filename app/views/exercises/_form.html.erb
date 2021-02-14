@@ -1,0 +1,21 @@
+<%= form_with model: exercise do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <% @exercise.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions %>
+    <% @exercise.errors.full_messages_for(:instructions).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
