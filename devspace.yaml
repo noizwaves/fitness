@@ -42,7 +42,9 @@ dev:
     downloadExcludePaths:
       - tmp
       - node_modules
-      - log/development.log
+      - log
+      - db
+      - 'db/*.sqlite*'
     onUpload:
       restartContainer: false
   ports:

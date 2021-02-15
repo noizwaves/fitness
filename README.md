@@ -52,6 +52,9 @@ Gemfile changes will automatically sync back locally:
 [0:sync:app] Downstream - Successfully processed 2 change(s)
 ```
 
+#### Running tests
+1.  In another terminal, run `$ devspace enter -c fitness-web -- bin/rails test`
+
 ### Local development (Skaffold + Minikube)
 1.  `$ asdf install`
 1.  `$ minikube start`
