@@ -1,19 +1,25 @@
 version: '3'
 services:
   web:
+    container_name: fitness_web
     build: .
     ports:
       - '3000:3000'
     depends_on:
       - postgres
+      - redis
     environment:
       DB_HOST: postgres
       DB_USERNAME: fitness
       DB_PASSWORD: development
       DB_NAME: fitness_development
+      REDIS_URL: redis://redis:6379/0
     volumes:
       - './:/app'
+    tty: true
+    stdin_open: true
   postgres:
+    container_name: fitness_postgres
     image: 'postgres:13.2'
     ports:
       - '5432:5432'
@@ -24,3 +30,8 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - './db/development:/var/lib/postgresql/data/pgdata'
+  redis:
+    container_name: fitness_redis
+    image: 'redis:6.0'
+    ports:
+      - '6379:6379'
