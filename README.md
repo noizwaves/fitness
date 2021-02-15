@@ -11,6 +11,7 @@
 1.  `$ yarn install`
 1.  `$ bin/rails s`
 1.  In another terminal, run `$ bin/sidekiq`
+1.  In another terminal, run `$ bin/webpack-dev-server`
 1.  Navigate to [fitness app](https://localhost:3000)
 1.  Make code changes
 1.  Refresh browser

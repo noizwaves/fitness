@@ -13,3 +13,5 @@ spec:
         value: postgres
       - name: REDIS_URL
         value: redis://redis:6379/0
+      - name: WEBPACKER_DEV_SERVER_HOST
+        value: fitness-webpack

@@ -26,6 +26,10 @@ portForward:
     resourceName: fitness-web
     namespace: default
     port: 3000
+  - resourceType: pod
+    resourceName: fitness-webpack
+    namespace: default
+    port: 3035
 deploy:
   kubectl:
     manifests:
