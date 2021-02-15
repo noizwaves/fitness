@@ -20,6 +20,7 @@ services:
     stdin_open: true
   sidekiq:
     container_name: fitness-sidekiq
+    command: ./bin/sidekiq
     build: .
     depends_on:
       - postgres
