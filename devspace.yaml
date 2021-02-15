@@ -1,0 +1,78 @@
+version: v1beta9
+images:
+  app:
+#    image: docker.pkg.github.com/noizwaves/fitness/fitness-dev
+    image: fitness-dev
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+    - USER root
+    build:
+      docker:
+        preferMinikube: true
+deployments:
+- name: fitness
+  kubectl:
+    replaceImageTags: true
+    manifests:
+    - kubernetes/**
+dev:
+  open:
+    - url: http://localhost:3000
+  sync:
+  - imageName: app
+    labelSelector:
+      name: fitness-web
+    excludePaths:
+    - .git/
+    uploadExcludePaths:
+    - node_modules
+    - kubernetes
+    - log
+    - '!log/.keep'
+    - tmp
+    - '!tmp/.keep'
+    - db/development.sqlite3
+    - db/development
+    - Dockerfile
+    - docker-compose.yml
+    - .tool-versions
+    - .idea
+    - devspace.yaml
+    downloadExcludePaths:
+      - tmp
+      - node_modules
+      - log/development.log
+    onUpload:
+      restartContainer: false
+  ports:
+    - labelSelector:
+        name: fitness-web
+      forward:
+        - port: 3000
+          remotePort: 3000
+    - labelSelector:
+        app: fitness-webpack
+      forward:
+        - port: 3035
+          remotePort: 3035
+profiles:
+- name: production
+  description: ""
+  patches:
+  - op: remove
+    path: images.app.appendDockerfileInstructions
+  - op: remove
+    path: images.app.injectRestartHelper
+- name: interactive
+  description: ""
+  patches:
+  - op: add
+    path: dev.interactive
+    value:
+      defaultEnabled: true
+  - op: add
+    path: images.app.entrypoint
+    value:
+    - sleep
+    - "9999999999"

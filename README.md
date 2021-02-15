@@ -24,11 +24,39 @@
 1.  Open a new terminal
 1.  Install gem via `$ bundle add <gem-name>`
 
-### Local development (Skaffold + minikube)
+### Local development (DevSpace + Minikube)
+1.  Install `devspace` CLI via:
+    1.  `$ curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;`
+    1.  `$ sudo mv devspace /usr/local/bin;`
+1.  `$ minikube start`
+1.  Run `$ devspace dev` to start development mode
+1.  [fitness app](http://localhost:3000) will open automatically in browser
+1.  Make code changes
+1.  Refresh browser
+1.  Repeat (change, refresh, etc)
+1.  In the terminal window, run <kbd>Ctrl+C,Q</kbd> to stop development mode
+1.  Run `$ devspace purge` to clean up resources
+
+#### Debugging
+1.  In another terminal, run `$ devspace attach -c fitness-web`
+1.  Interact with debugger
+1.  Detach by <kbd>Ctrl+P,Q</kbd>
+
+#### Installing a Gem
+1.  In another terminal, run `$ devspace enter -c fitness-web -- bundle add <gem-name>`
+
+Gemfile changes will automatically sync back locally:
+```
+[0:sync:app] Downstream - Download file './Gemfile', uncompressed: ~2.25 KB
+[0:sync:app] Downstream - Download file './Gemfile.lock', uncompressed: ~6.04 KB
+[0:sync:app] Downstream - Successfully processed 2 change(s)
+```
+
+### Local development (Skaffold + Minikube)
 1.  `$ asdf install`
 1.  `$ minikube start`
 1.  `$ skaffold dev --port-forward`
-1.  Navigate to [fitness app](https://localhost:3000)
+1.  Navigate to [fitness app](http://localhost:3000)
 1.  Make code changes
 1.  Refresh browser
 1.  Repeat (change, refresh, etc)
@@ -67,3 +95,4 @@
 ## Useful resources
 
 - [Skaffold examples](https://github.com/GoogleContainerTools/skaffold/tree/master/examples)
+- [RoR dev in devspace](https://devspace.cloud/blog/2019/10/21/deploy-ruby-on-rails-to-kubernetes)
