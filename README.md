@@ -10,6 +10,7 @@
 1.  `$ bundle install`
 1.  `$ yarn install`
 1.  `$ bin/rails s`
+1.  In another terminal, run `$ bin/sidekiq`
 1.  Navigate to [fitness app](https://localhost:3000)
 1.  Make code changes
 1.  Refresh browser
@@ -32,17 +33,17 @@
 1.  Repeat (change, refresh, etc)
 
 #### Debugging
-1.  In another terminal, run `$ kubectl attach -it fitness`
+1.  In another terminal, run `$ kubectl attach -it fitness-web`
 1.  Interact with debugger
 1.  Detach by <kbd>Ctrl+P,Q</kbd>
 
 #### Installing a Gem
-1.  Get shell on pod via `$ kubectl exec -it fitness -- /bin/bash`
+1.  Get shell on pod via `$ kubectl exec -it fitness-web -- /bin/bash`
 1.  Install gem via `$ bundle add <gem-name>`
 1.  Exit out of shell via `$ exit`
 1.  Copy changed files back to local repo via:
-    1.  `$ kubectl cp fitness:/app/Gemfile ./Gemfile`
-    1.  `$ kubectl cp fitness:/app/Gemfile.lock ./Gemfile.lock`
+    1.  `$ kubectl cp fitness-web:/app/Gemfile ./Gemfile`
+    1.  `$ kubectl cp fitness-web:/app/Gemfile.lock ./Gemfile.lock`
 
 ### Local development (Docker)
 1.  `$ docker-compose up`
@@ -53,7 +54,7 @@
 
 #### Debugging
 1.  Add `binding.pry` in code
-1.  In another terminal, run `$ docker attach fitness_web`
+1.  In another terminal, run `$ docker attach fitness-web`
 1.  Interact with debugger
 1.  Detach by <kbd>Ctrl+P,Q</kbd>
 
@@ -61,3 +62,7 @@
 1.  Open a new terminal
 1.  Get shell on web container via `$ docker-compose exec web bash`
 1.  Install gem via `$ bundle add <gem-name>`
+
+## Useful resources
+
+- [Skaffold examples](https://github.com/GoogleContainerTools/skaffold/tree/master/examples)

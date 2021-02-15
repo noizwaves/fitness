@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fitness-sidekiq
+spec:
+  containers:
+  - name: fitness-sidekiq
+    image: fitness-dev
+    stdin: true
+    tty: true
+    command:
+     - 'bin/sidekiq'
+    env:
+      - name: DB_HOST
+        value: postgres
+      - name: REDIS_URL
+        value: redis://redis:6379/0

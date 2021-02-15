@@ -23,7 +23,7 @@ build:
           - 'yarn.lock'
 portForward:
   - resourceType: pod
-    resourceName: fitness
+    resourceName: fitness-web
     namespace: default
     port: 3000
 deploy:
