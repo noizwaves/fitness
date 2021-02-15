@@ -8,4 +8,7 @@ spec:
     image: fitness-dev
     stdin: true
     tty: true
+    env:
+      - name: DB_HOST
+        value: postgres
 

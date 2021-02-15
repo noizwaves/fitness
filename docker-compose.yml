@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_USERNAME: fitness
+      DB_PASSWORD: development
+      DB_NAME: fitness_development
+    volumes:
+      - './:/app'
+  postgres:
+    image: 'postgres:13.2'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: fitness
+      POSTGRES_PASSWORD: development
+      POSTGRES_DB: fitness_development
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - './db/development:/var/lib/postgresql/data/pgdata'

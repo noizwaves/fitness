@@ -11,6 +11,7 @@ tmp
 !tmp/.keep
 
 db/development.sqlite3
+db/development
 
 Dockerfile
 .tool-versions
