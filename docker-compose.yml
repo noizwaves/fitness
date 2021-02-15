@@ -25,6 +25,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - web
     environment:
       DB_HOST: postgres
       DB_USERNAME: fitness
