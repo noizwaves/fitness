@@ -48,6 +48,33 @@ dev:
       - 'db/*.sqlite*'
     onUpload:
       restartContainer: false
+  - imageName: app
+    labelSelector:
+      name: fitness-webpack
+    excludePaths:
+      - .git/
+    uploadExcludePaths:
+      - node_modules
+      - kubernetes
+      - log
+      - '!log/.keep'
+      - tmp
+      - '!tmp/.keep'
+      - db/development.sqlite3
+      - db/development
+      - Dockerfile
+      - docker-compose.yml
+      - .tool-versions
+      - .idea
+      - devspace.yaml
+    downloadExcludePaths:
+      - tmp
+      - node_modules
+      - log
+      - db
+      - 'db/*.sqlite*'
+    onUpload:
+      restartContainer: false
   ports:
     - labelSelector:
         name: fitness-web
