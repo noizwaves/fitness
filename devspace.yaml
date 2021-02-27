@@ -1,15 +1,14 @@
 version: v1beta9
 images:
   app:
-#    image: docker.pkg.github.com/noizwaves/fitness/fitness-dev
-    image: fitness-dev
+    image: ghcr.io/noizwaves/fitness-dev
     preferSyncOverRebuild: true
     injectRestartHelper: true
     appendDockerfileInstructions:
     - USER root
     build:
-      docker:
-        preferMinikube: true
+      kaniko:
+        pullSecret: ghcr-docker-secret
 deployments:
 - name: fitness
   kubectl:
