@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: fitness-webpack
   labels:
-    app: fitness-webpack
+    name: fitness-webpack
 spec:
   containers:
   - name: fitness-webpack

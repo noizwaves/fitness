@@ -55,7 +55,7 @@ dev:
         - port: 3000
           remotePort: 3000
     - labelSelector:
-        app: fitness-webpack
+        name: fitness-webpack
       forward:
         - port: 3035
           remotePort: 3035
