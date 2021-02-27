@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: fitness-sidekiq
-    image: fitness-dev
+    image: ghcr.io/noizwaves/fitness-dev
     stdin: true
     tty: true
     command:

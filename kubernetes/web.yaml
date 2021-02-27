@@ -7,9 +7,14 @@ metadata:
 spec:
   containers:
   - name: fitness-web
-    image: fitness-dev
+    image: ghcr.io/noizwaves/fitness-dev
     stdin: true
     tty: true
+    command:
+      - './bin/rails'
+      - 'server'
+      - '-b'
+      - '0.0.0.0'
     env:
       - name: DB_HOST
         value: postgres

@@ -2,13 +2,15 @@ version: v1beta9
 images:
   app:
     image: ghcr.io/noizwaves/fitness-dev
+    createPullSecret: true
     preferSyncOverRebuild: true
     injectRestartHelper: true
     appendDockerfileInstructions:
     - USER root
     build:
       kaniko:
-        pullSecret: ghcr-docker-secret
+        cache: true
+        pullSecret: devspace-auth-ghcr-io
 deployments:
 - name: fitness
   kubectl:
