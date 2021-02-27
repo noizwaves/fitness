@@ -34,4 +34,4 @@ spec:
       name: webpack
   type: ClusterIP
   selector:
-    app: fitness-webpack
+    name: fitness-webpack
