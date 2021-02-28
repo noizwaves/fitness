@@ -46,6 +46,7 @@ dev:
       - log
       - db
       - 'db/*.sqlite*'
+      - public/packs
     onUpload:
       restartContainer: false
   - imageName: app
@@ -67,6 +68,7 @@ dev:
       - .tool-versions
       - .idea
       - devspace.yaml
+      - public/packs
     downloadExcludePaths:
       - tmp
       - node_modules
