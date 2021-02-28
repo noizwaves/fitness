@@ -18,8 +18,6 @@ deployments:
     manifests:
     - kubernetes/**
 dev:
-  open:
-    - url: http://localhost:3000
   sync:
   - imageName: app
     labelSelector:
