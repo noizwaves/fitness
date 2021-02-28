@@ -6,7 +6,7 @@ metadata:
     name: fitness-web
 spec:
   containers:
-  - name: fitness-web
+  - name: web
     image: ghcr.io/noizwaves/fitness-dev
     stdin: true
     tty: true
@@ -20,5 +20,23 @@ spec:
         value: postgres
       - name: REDIS_URL
         value: redis://redis:6379/0
-      - name: WEBPACKER_DEV_SERVER_HOST
-        value: fitness-webpack
+    volumeMounts:
+      - name: fitness-packs
+        mountPath: /app/public/packs
+  - name: webpack
+    image: ghcr.io/noizwaves/fitness-dev
+    stdin: true
+    tty: true
+    command:
+      - './bin/webpack-dev-server'
+    env:
+      - name: DB_HOST
+        value: postgres
+      - name: REDIS_URL
+        value: redis://redis:6379/0
+    volumeMounts:
+      - name: fitness-packs
+        mountPath: /app/public/packs
+  volumes:
+    - name: fitness-packs
+      emptyDir: {}

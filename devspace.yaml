@@ -22,6 +22,7 @@ dev:
   - imageName: app
     labelSelector:
       name: fitness-web
+    containerName: web
     excludePaths:
     - .git/
     uploadExcludePaths:
@@ -38,6 +39,7 @@ dev:
     - .tool-versions
     - .idea
     - devspace.yaml
+    - public/packs
     downloadExcludePaths:
       - tmp
       - node_modules
@@ -49,7 +51,8 @@ dev:
       restartContainer: false
   - imageName: app
     labelSelector:
-      name: fitness-webpack
+      name: fitness-web
+    containerName: webpack
     excludePaths:
       - .git/
     uploadExcludePaths:
@@ -73,6 +76,7 @@ dev:
       - log
       - db
       - 'db/*.sqlite*'
+      - public/packs
     onUpload:
       restartContainer: false
   ports:
@@ -82,7 +86,7 @@ dev:
         - port: 3000
           remotePort: 3000
     - labelSelector:
-        name: fitness-webpack
+        name: fitness-web
       forward:
         - port: 3035
           remotePort: 3035
