@@ -36,6 +36,7 @@ dev:
 
     excludePaths:
     - .git/
+    - .devspace
     uploadExcludePaths:
     - node_modules
     - kubernetes
@@ -70,6 +71,7 @@ dev:
 
     excludePaths:
       - .git/
+      - .devspace
     uploadExcludePaths:
       - node_modules
       - kubernetes
