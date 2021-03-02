@@ -12,17 +12,28 @@ images:
         cache: true
         pullSecret: devspace-auth-ghcr-io
 deployments:
-- name: fitness
-  kubectl:
-    replaceImageTags: true
-    manifests:
-    - kubernetes/**
+  - name: fitness-dependencies
+    kubectl:
+      replaceImageTags: false
+      manifests:
+        - kubernetes/postgres.yaml
+        - kubernetes/redis.yaml
+  - name: fitness
+    kubectl:
+      replaceImageTags: true
+      manifests:
+        - kubernetes/web.yaml
+        - kubernetes/sidekiq.yaml
 dev:
   sync:
-  - imageName: app
-    labelSelector:
+  - labelSelector:
       name: fitness-web
     containerName: web
+
+    # Disable faster dev command as imageName seems to break file sync
+    # https://devspace.sh/cli/docs/configuration/development/file-synchronization#imagename
+    # imageName: app
+
     excludePaths:
     - .git/
     uploadExcludePaths:
@@ -49,10 +60,14 @@ dev:
       - public/packs
     onUpload:
       restartContainer: false
-  - imageName: app
-    labelSelector:
+  - labelSelector:
       name: fitness-web
     containerName: webpack
+
+    # Disable faster dev command as imageName seems to break file sync
+    # https://devspace.sh/cli/docs/configuration/development/file-synchronization#imagename
+    # imageName: app
+
     excludePaths:
       - .git/
     uploadExcludePaths:
