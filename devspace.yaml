@@ -105,6 +105,8 @@ dev:
       forward:
         - port: 3035
           remotePort: 3035
+  logs:
+    disabled: true
 profiles:
 - name: production
   description: ""
