@@ -4,6 +4,7 @@ images:
     image: ghcr.io/noizwaves/fitness-dev
     createPullSecret: true
     preferSyncOverRebuild: true
+    rebuildStrategy: ignoreContextChanges
     injectRestartHelper: true
     appendDockerfileInstructions:
     - USER root
@@ -29,11 +30,6 @@ dev:
   - labelSelector:
       name: fitness-web
     containerName: web
-
-    # Disable faster dev command as imageName seems to break file sync
-    # https://devspace.sh/cli/docs/configuration/development/file-synchronization#imagename
-    # imageName: app
-
     excludePaths:
     - .git/
     - .devspace
@@ -64,11 +60,6 @@ dev:
   - labelSelector:
       name: fitness-web
     containerName: webpack
-
-    # Disable faster dev command as imageName seems to break file sync
-    # https://devspace.sh/cli/docs/configuration/development/file-synchronization#imagename
-    # imageName: app
-
     excludePaths:
       - .git/
       - .devspace
