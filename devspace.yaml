@@ -31,37 +31,8 @@ dev:
       name: fitness-web
     containerName: web
     excludePaths:
-    - .git/
-    - .devspace
-    uploadExcludePaths:
-    - node_modules
-    - kubernetes
-    - log
-    - '!log/.keep'
-    - tmp
-    - '!tmp/.keep'
-    - db/development.sqlite3
-    - db/development
-    - Dockerfile
-    - docker-compose.yml
-    - .tool-versions
-    - .idea
-    - devspace.yaml
-    - public/packs
-    downloadExcludePaths:
-      - tmp
-      - node_modules
-      - log
-      - db
-      - 'db/*.sqlite*'
-      - public/packs
-    onUpload:
-      restartContainer: false
-  - labelSelector:
-      name: fitness-web
-    containerName: webpack
-    excludePaths:
       - .git/
+      - .gitignore
       - .devspace
     uploadExcludePaths:
       - node_modules
@@ -70,8 +41,6 @@ dev:
       - '!log/.keep'
       - tmp
       - '!tmp/.keep'
-      - db/development.sqlite3
-      - db/development
       - Dockerfile
       - docker-compose.yml
       - .tool-versions
@@ -82,8 +51,33 @@ dev:
       - tmp
       - node_modules
       - log
-      - db
-      - 'db/*.sqlite*'
+      - public/packs
+    onUpload:
+      restartContainer: false
+  - labelSelector:
+      name: fitness-web
+    containerName: webpack
+    excludePaths:
+      - .git/
+      - .gitignore
+      - .devspace
+    uploadExcludePaths:
+      - node_modules
+      - kubernetes
+      - log
+      - '!log/.keep'
+      - tmp
+      - '!tmp/.keep'
+      - Dockerfile
+      - docker-compose.yml
+      - .tool-versions
+      - .idea
+      - devspace.yaml
+      - public/packs
+    downloadExcludePaths:
+      - tmp
+      - node_modules
+      - log
       - public/packs
     onUpload:
       restartContainer: false
