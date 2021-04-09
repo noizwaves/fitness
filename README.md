@@ -5,7 +5,9 @@
 ### Local development (Linux)
 1.  Start PostgreSQL via `$ docker run -p 5432:5432 --rm -e POSTGRES_DB=fitness_development -e POSTGRES_USER=fitness -e POSTGRES_PASSWORD=development postgres:13.2`
 1.  Start Redis via `$ docker run -p 6379:6379 --rm redis:6.0`
-1.  `$ sudo apt-get install libpq-dev libsqlite3-dev`
+1.  Install native dependencies via:
+    - Ubuntu: `$ sudo apt-get install libpq-dev libsqlite3-dev`
+    - Arch: `$ sudo pacman -Syu postgresql-libs sqlite`
 1.  `$ asdf install`
 1.  `$ bundle install`
 1.  `$ yarn install`
