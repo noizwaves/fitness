@@ -93,22 +93,12 @@ dev:
   logs:
     disabled: true
 profiles:
-- name: production
-  description: ""
-  patches:
-  - op: remove
-    path: images.app.appendDockerfileInstructions
-  - op: remove
-    path: images.app.injectRestartHelper
-- name: interactive
-  description: ""
-  patches:
-  - op: add
-    path: dev.interactive
-    value:
-      defaultEnabled: true
-  - op: add
-    path: images.app.entrypoint
-    value:
-    - sleep
-    - "9999999999"
+- name: local
+  merge:
+    images:
+      app:
+        build:
+          buildKit:
+            inCluster: null
+            skipPush: true
+            preferMinikube: true
