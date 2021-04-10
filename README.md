@@ -58,6 +58,21 @@ Gemfile changes will automatically sync back locally:
 #### Running tests
 1.  In another terminal, run `$ devspace enter -c fitness-web -- bin/rails test`
 
+### Local development (DevSpace + Loft)
+1.  Install `devspace` CLI via:
+    1.  `$ curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;`
+    1.  `$ sudo mv devspace /usr/local/bin;`
+1.  Install Loft plugin via `$ devspace add plugin https://github.com/loft-sh/loft-devspace-plugin`
+1.  Follow [instructions](./cluster/README.md) to install Loft onto a minikube-based k8s cluster
+1.  Log into Loft via `$ devspace login https://loft.noizwaves.cloud`
+1.  [fitness app](http://localhost:3000) will open automatically in browser
+1.  _"Do development"_
+    1.  Make source code changes
+    1.  Refresh browser
+    1.  etc.
+1.  In the terminal window, run <kbd>Ctrl+C</kbd> to stop `devspace dev`
+1.  Run `$ devspace purge` to clean up resources
+
 ### Local development (Skaffold + Minikube)
 1.  `$ asdf install`
 1.  `$ minikube start`

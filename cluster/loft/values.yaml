@@ -1,0 +1,15 @@
+certIssuer:
+  create: true
+  email: admin@noizwaves.cloud
+  httpResolver:
+    enabled: false
+  resolvers:
+    - dns01:
+        cloudflare:
+          email: cloudflare@noizwaves.cloud
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
+ingress:
+  enabled: true
+  host: loft.noizwaves.cloud
