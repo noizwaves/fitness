@@ -5,8 +5,6 @@ images:
     preferSyncOverRebuild: true
     rebuildStrategy: ignoreContextChanges
     injectRestartHelper: true
-    appendDockerfileInstructions:
-    - USER root
     build:
       buildKit:
         inCluster: {}
