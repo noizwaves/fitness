@@ -56,7 +56,7 @@ Gemfile changes will automatically sync back locally:
 ```
 
 #### Running tests
-1.  In another terminal, run `$ devspace enter -c fitness-web -- bin/rails test`
+1.  In another terminal, run `$ devspace run rails-test`
 
 ### Local development (DevSpace + Loft)
 1.  Install `devspace` CLI via:

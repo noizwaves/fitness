@@ -92,6 +92,9 @@ dev:
           remotePort: 3035
   logs:
     disabled: true
+commands:
+  - name: rails-test
+    command: devspace enter --pod fitness-web --container web -- bin/rails test
 profiles:
 - name: local
   merge:
