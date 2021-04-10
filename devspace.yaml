@@ -1,8 +1,7 @@
 version: v1beta9
 images:
   app:
-    image: ghcr.io/noizwaves/fitness-dev
-    createPullSecret: true
+    image: ghcr.io/noizwaves/fitness
     preferSyncOverRebuild: true
     rebuildStrategy: ignoreContextChanges
     injectRestartHelper: true
