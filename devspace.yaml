@@ -8,9 +8,8 @@ images:
     appendDockerfileInstructions:
     - USER root
     build:
-      kaniko:
-        cache: true
-        pullSecret: devspace-auth-ghcr-io
+      buildKit:
+        inCluster: {}
 deployments:
   - name: fitness-dependencies
     kubectl:
