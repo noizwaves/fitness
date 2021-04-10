@@ -74,17 +74,3 @@ In summary, the cluster:
       --reuse-values \
       -f cluster/loft/values.yaml
     ```
-
-### 5. Configure Loft
-1.  Navigate to [https://loft.production.cloud](https://loft.production.cloud) and log in with previous credentials
-1.  Create a shared secret for the ghcr.io docker credentials by:
-    1.  Navigate to [Secrets](https://loft.noizwaves.cloud/secrets)
-    1.  Click `Add Shared Secret`, name it `docker-auth-ghcr-io` and click `Create`
-    1.  View secret details by clicking the name or navigating to [https://loft.noizwaves.cloud/secrets/loft/docker-auth-ghcr-io](https://loft.noizwaves.cloud/secrets/loft/docker-auth-ghcr-io)
-    1.  Click `Add Key`, enter `docker-credentials`, paste in the contents of `~/.docker/config`, and click `Save`
-1.  Assign ghcr.io credentials to Admin by:
-    1.  Navigate to [Users](https://loft.noizwaves.cloud/users)
-    1.  Locate `admin` user and click on Edit icon
-    1.  Expand `Image Pull Secrets`
-    1.  Select `docker-auth-ghcr-io` from the drop down
-    1.  Click `Update`

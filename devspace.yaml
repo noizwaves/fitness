@@ -1,7 +1,7 @@
 version: v1beta9
 images:
   app:
-    image: ghcr.io/noizwaves/fitness
+    image: registry.noizwaves.cloud/fitness
     preferSyncOverRebuild: true
     rebuildStrategy: ignoreContextChanges
     injectRestartHelper: true

@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: web
-    image: ghcr.io/noizwaves/fitness
+    image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
     command:
@@ -24,7 +24,7 @@ spec:
       - name: fitness-packs
         mountPath: /app/public/packs
   - name: webpack
-    image: ghcr.io/noizwaves/fitness
+    image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
     command:

@@ -31,7 +31,6 @@
     1.  `$ curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;`
     1.  `$ sudo mv devspace /usr/local/bin;`
 1.  `$ minikube start`
-1.  Ensure GitHub Container Registry secret exists via: `kubectl create secret docker-registry devspace-auth-ghcr-io --docker-server=ghcr.io --docker-username=<USERNAME> --docker-password=<PERSONAL_ACCESS_TOKEN>`
 1.  Run `$ devspace dev` to start development mode
 1.  [fitness app](http://localhost:3000) will open automatically in browser
 1.  Make code changes
