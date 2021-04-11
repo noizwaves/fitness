@@ -29,7 +29,21 @@ In summary, the cluster:
     1.   Leave vm via `$ exit`
 1.  In your local network DNS settings (i.e. Pihole, `/etc/hosts`) add record that resolves `loft.noizwaves.cloud` to `$MINIKUBE_IP`
 
-### 2. Install ingress-nginx
+### 2. Configure Minikube cluster
+
+We need to ensure that the local network DNS server is the only server used.
+
+1.  SSH into minikube via `$ minikube ssh`
+1.  Disable retrieving of DNS over DHCP by appending `UseDNS=false` to `/etc/systemd/network/20-dhcp.network`
+1.  Edit `/etc/systemd/resolved.conf` and set:
+    1.  `DNS=192.168.1.232`
+    1.  `FallbackDNS=`
+1.  Restart networking system by:
+    1.  `$ sudo systemctl daemon-reload`
+    1.  `$ sudo systemctl restart systemd-networkd`
+    1.  `$ sudo systemctl restart systemd-resolved`
+
+### 3. Install ingress-nginx
 
 1.  Install ingress-nginx by running:
     ```
@@ -40,7 +54,7 @@ In summary, the cluster:
       -f cluster/ingress-nginx/values.yaml
     ```
 
-### 3. Install cert-manager
+### 4. Install cert-manager
 
 1.  Install cert-manager by running:
     ```
@@ -51,7 +65,7 @@ In summary, the cluster:
       -f cluster/cert-manager/values.yaml
     ```
 
-### 4. Install Loft
+### 5. Install Loft
 
 1.  Download `loft` CLI [by](https://loft.sh/docs/quickstart#1-download-loft-cli):
     1.  `$ curl -s -L "https://github.com/loft-sh/loft/releases/latest" | sed -nE 's!.*"([^"]*loft-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o loft && chmod +x loft;`
