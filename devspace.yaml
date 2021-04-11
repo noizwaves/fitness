@@ -30,25 +30,20 @@ dev:
       - .git/
       - .gitignore
       - .devspace
+      - .idea
+      - .tool-versions
       - cluster
-    uploadExcludePaths: &upload-exclude-paths
-      - node_modules
       - kubernetes
-      - log
-      - '!log/.keep'
+      - node_modules
       - tmp
-      - '!tmp/.keep'
+      - log
+      - public/packs
       - Dockerfile
       - docker-compose.yml
-      - .tool-versions
-      - .idea
       - devspace.yaml
-      - public/packs
-    downloadExcludePaths: &download-exclude-paths
-      - tmp
-      - node_modules
-      - log
-      - public/packs
+    uploadExcludePaths: &upload-exclude-paths
+      - '!log/.keep'
+      - '!tmp/.keep'
     onUpload: &on-upload
       restartContainer: false
       execRemote:
@@ -65,14 +60,12 @@ dev:
     containerName: webpack
     excludePaths: *exclude-paths
     uploadExcludePaths: *upload-exclude-paths
-    downloadExcludePaths: *download-exclude-paths
     onUpload: *on-upload
   - labelSelector:
       name: fitness-sidekiq
     containerName: sidekiq
     excludePaths: *exclude-paths
     uploadExcludePaths: *upload-exclude-paths
-    downloadExcludePaths: *download-exclude-paths
     onUpload: *on-upload
   ports:
     - labelSelector:
