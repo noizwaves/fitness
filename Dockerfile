@@ -18,12 +18,12 @@ WORKDIR /app
 
 FROM base as gems
 COPY Gemfile Gemfile.lock /app/
-RUN bundle install
+RUN --mount=type=cache,target=/usr/local/bundle bundle install
 
 
 FROM base as node_modules
 COPY package.json yarn.lock /app/
-RUN yarn install
+RUN --mount=type=cache,target=/app/node_modules yarn install
 
 
 FROM base as final
