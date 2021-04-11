@@ -26,12 +26,12 @@ dev:
   - labelSelector:
       name: fitness-web
     containerName: web
-    excludePaths:
+    excludePaths: &exclude-paths
       - .git/
       - .gitignore
       - .devspace
       - cluster
-    uploadExcludePaths:
+    uploadExcludePaths: &upload-exclude-paths
       - node_modules
       - kubernetes
       - log
@@ -44,12 +44,12 @@ dev:
       - .idea
       - devspace.yaml
       - public/packs
-    downloadExcludePaths:
+    downloadExcludePaths: &download-exclude-paths
       - tmp
       - node_modules
       - log
       - public/packs
-    onUpload:
+    onUpload: &on-upload
       restartContainer: false
       execRemote:
         onFileChange:
@@ -63,77 +63,17 @@ dev:
   - labelSelector:
       name: fitness-web
     containerName: webpack
-    excludePaths:
-      - .git/
-      - .gitignore
-      - .devspace
-      - cluster
-    uploadExcludePaths:
-      - node_modules
-      - kubernetes
-      - log
-      - '!log/.keep'
-      - tmp
-      - '!tmp/.keep'
-      - Dockerfile
-      - docker-compose.yml
-      - .tool-versions
-      - .idea
-      - devspace.yaml
-      - public/packs
-    downloadExcludePaths:
-      - tmp
-      - node_modules
-      - log
-      - public/packs
-    onUpload:
-      restartContainer: false
-      execRemote:
-        onFileChange:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
-        onBatch:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
+    excludePaths: *exclude-paths
+    uploadExcludePaths: *upload-exclude-paths
+    downloadExcludePaths: *download-exclude-paths
+    onUpload: *on-upload
   - labelSelector:
       name: fitness-sidekiq
     containerName: sidekiq
-    excludePaths:
-      - .git/
-      - .gitignore
-      - .devspace
-      - cluster
-    uploadExcludePaths:
-      - node_modules
-      - kubernetes
-      - log
-      - '!log/.keep'
-      - tmp
-      - '!tmp/.keep'
-      - Dockerfile
-      - docker-compose.yml
-      - .tool-versions
-      - .idea
-      - devspace.yaml
-      - public/packs
-    downloadExcludePaths:
-      - tmp
-      - node_modules
-      - log
-      - public/packs
-    onUpload:
-      restartContainer: false
-      execRemote:
-        onFileChange:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
-        onBatch:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
+    excludePaths: *exclude-paths
+    uploadExcludePaths: *upload-exclude-paths
+    downloadExcludePaths: *download-exclude-paths
+    onUpload: *on-upload
   ports:
     - labelSelector:
         name: fitness-web
