@@ -8,6 +8,11 @@ images:
     build:
       buildKit:
         inCluster: {}
+        args:
+          - --cache-to
+          - type=registry,ref=registry.noizwaves.cloud/fitness-cache
+          - --cache-from
+          - type=registry,ref=registry.noizwaves.cloud/fitness-cache
 deployments:
   - name: fitness-dependencies
     kubectl:
