@@ -78,12 +78,12 @@ We need to ensure that the local network DNS server is the only server used.
     ```
     $ kubectl create secret generic cloudflare-api-token-secret \
       --from-literal=api-token=${CLOUDFLARE_API_TOKEN} \
-      --namespace cert-manager
+      --namespace loft
     ```
 1.  Enable cert-issuer and ingress via:
     ```
     $ helm upgrade loft loft \
-      --repo https://charts.devspace.sh/
+      --repo https://charts.devspace.sh/ \
       --namespace loft \
       --reuse-values \
       -f cluster/loft/values.yaml
