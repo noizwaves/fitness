@@ -23,12 +23,13 @@ RUN --mount=type=cache,target=/usr/local/bundle bundle install
 
 FROM base as node_modules
 COPY package.json yarn.lock /app/
-RUN --mount=type=cache,target=/app/node_modules yarn install
+RUN --mount=type=cache,target=/app/node_modules --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 yarn install
 
 
 FROM base as final
 COPY --from=gems /usr/local/bundle /usr/local/bundle
 COPY --from=node_modules /app/node_modules /app/node_modules
+COPY --from=node_modules /usr/local/share/.cache/yarn/v6 /usr/local/share/.cache/yarn/v6
 
 COPY . /app
 
