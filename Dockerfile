@@ -1,4 +1,4 @@
-FROM ruby:2.7.3
+FROM ruby:2.7.3 as base
 
 # For `yarn`, `node`, and `psql`
 RUN apt-get update -qq && apt-get install -y \
@@ -15,11 +15,20 @@ ENV RAILS_ENV=${RAILS_ENV}
 
 WORKDIR /app
 
+
+FROM base as gems
 COPY Gemfile Gemfile.lock /app/
 RUN bundle install
 
+
+FROM base as node_modules
 COPY package.json yarn.lock /app/
 RUN yarn install
+
+
+FROM base as final
+COPY --from=gems /usr/local/bundle /usr/local/bundle
+COPY --from=node_modules /app/node_modules /app/node_modules
 
 COPY . /app
 
