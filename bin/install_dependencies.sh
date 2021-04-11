@@ -10,6 +10,6 @@ fi
 YARN_SHA=$(sha256sum /app/package.json | cut -d ' ' -f 1)
 YARN_TOUCH_PATH=/tmp/${YARN_SHA}
 if [ ! -f ${YARN_TOUCH_PATH} ]; then
-  bundle install
+  yarn install
   touch ${YARN_TOUCH_PATH}
 fi
