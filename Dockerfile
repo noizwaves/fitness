@@ -18,12 +18,19 @@ WORKDIR /app
 
 FROM base as gems
 COPY Gemfile Gemfile.lock /app/
-RUN --mount=type=cache,target=/usr/local/bundle bundle install
+RUN --mount=type=cache,target=/tmp/.bundle_cache \
+  bundle config set path /tmp/.bundle_cache && \
+  bundle install && \
+  cp -ar /tmp/.bundle_cache/ruby/2.7.0/** /usr/local/bundle && \
+  bundle config unset path
 
 
 FROM base as node_modules
 COPY package.json yarn.lock /app/
-RUN --mount=type=cache,target=/app/node_modules --mount=type=cache,target=/usr/local/share/.cache/yarn/v6 yarn install
+RUN --mount=type=cache,target=/tmp/.yarn_cache \
+  mkdir -p /usr/local/share/.cache/yarn && \
+  yarn install --cache-folder /tmp/.yarn_cache && \
+  cp -ar /tmp/.yarn_cache/v6 /usr/local/share/.cache/yarn/
 
 
 FROM base as final
