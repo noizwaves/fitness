@@ -34,10 +34,18 @@ In summary, the cluster:
 We need to ensure that the local network DNS server is the only server used.
 
 1.  SSH into minikube via `$ minikube ssh`
-1.  Disable retrieving of DNS over DHCP by appending `UseDNS=false` to `/etc/systemd/network/20-dhcp.network`
-1.  Edit `/etc/systemd/resolved.conf` and set:
-    1.  `DNS=192.168.1.232`
-    1.  `FallbackDNS=`
+1.  Disable DHCP-based DNS configuration on eth2 by creating `/etc/systemd/network/11-eth2.network` with contents
+    ```
+    [Match]
+    Name=eth2
+
+    [Network]
+    DHCP=ipv4
+    DNS=192.168.1.232
+
+    [DHCP]
+    UseDNS=false
+    ```
 1.  Restart networking system by:
     1.  `$ sudo systemctl daemon-reload`
     1.  `$ sudo systemctl restart systemd-networkd`
