@@ -39,6 +39,8 @@ dev:
       - '**'
       - '!/keymaps/'
       - '!/options/'
+      - '!/idea.properties'
+      - '!/disabled_plugins.txt'
   ports:
     - labelSelector:
         name: fitness-web
