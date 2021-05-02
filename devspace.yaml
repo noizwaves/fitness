@@ -83,6 +83,11 @@ dev:
       forward:
         - port: 3035
           remotePort: 3035
+    - labelSelector:
+        name: fitness-web
+      forward:
+        - port: 8080
+          remotePort: 8080
   logs:
     disabled: true
 commands:
@@ -90,6 +95,8 @@ commands:
     command: devspace enter --pod fitness-web --container web -- bin/rails db:setup
   - name: rails-test
     command: devspace enter --pod fitness-web --container web -- bin/rails test
+  - name: get-code-server-config
+    command: devspace enter --container web --silent -- cat /root/.config/code-server/config.yaml
 profiles:
 - name: local
   merge:

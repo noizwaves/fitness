@@ -10,7 +10,7 @@ spec:
     image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
-    command:
+    args:
       - './bin/rails'
       - 'server'
       - '-b'
@@ -23,6 +23,12 @@ spec:
     volumeMounts:
       - name: fitness-packs
         mountPath: /app/public/packs
+      - name: vscode
+        mountPath: "/root/.config/code-server"
+        subPath: "config"
+      - name: vscode
+        mountPath: "/root/.local/share/code-server"
+        subPath: "local/share"
   - name: webpack
     image: registry.noizwaves.cloud/fitness
     stdin: true
@@ -40,3 +46,19 @@ spec:
   volumes:
     - name: fitness-packs
       emptyDir: {}
+    - name: vscode
+      persistentVolumeClaim:
+        claimName: ide-vscode
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ide-vscode
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  accessModes:
+    - ReadWriteOnce

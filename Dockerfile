@@ -40,6 +40,11 @@ COPY --from=node_modules /usr/local/share/.cache/yarn/v6 /usr/local/share/.cache
 
 COPY . /app
 
+# Visual Studio Code
+RUN curl -fsOL https://github.com/cdr/code-server/releases/download/v3.9.3/code-server_3.9.3_amd64.deb && \
+    dpkg -i code-server_3.9.3_amd64.deb && \
+    rm code-server_3.9.3_amd64.deb
+
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
