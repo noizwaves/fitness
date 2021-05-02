@@ -21,8 +21,9 @@ spec:
       - name: REDIS_URL
         value: redis://redis:6379/0
     volumeMounts:
-      - name: fitness-packs
-        mountPath: /app/public/packs
+      - name: projector-home
+        mountPath: /app
+        subPath: workspace/fitness
   - name: webpack
     image: registry.noizwaves.cloud/fitness
     stdin: true
@@ -35,8 +36,10 @@ spec:
       - name: REDIS_URL
         value: redis://redis:6379/0
     volumeMounts:
-      - name: fitness-packs
-        mountPath: /app/public/packs
+      - name: projector-home
+        mountPath: /app
+        subPath: workspace/fitness
   volumes:
-    - name: fitness-packs
-      emptyDir: {}
+    - name: projector-home
+      persistentVolumeClaim:
+        claimName: ide-home

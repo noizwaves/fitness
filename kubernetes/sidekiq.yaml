@@ -17,3 +17,11 @@ spec:
         value: postgres
       - name: REDIS_URL
         value: redis://redis:6379/0
+    volumeMounts:
+      - name: projector-home
+        mountPath: /app
+        subPath: workspace/fitness
+  volumes:
+    - name: projector-home
+      persistentVolumeClaim:
+        claimName: ide-home

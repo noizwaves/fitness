@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ide-idea
+  labels:
+    name: ide-idea
+spec:
+  initContainers:
+    - name: fix-ssh-key-permissions
+      image: alpine
+      command: ["sh", "-c", "cp /root_ssh/* /user_ssh && chown -R 1000:1000 /user_ssh"]
+      volumeMounts:
+        - name: github-ssh-key
+          mountPath: /root_ssh
+          readOnly: true
+        - name: ssh-key
+          mountPath: /user_ssh
+
+  containers:
+    - name: ide-idea
+      image: registry.jetbrains.team/p/prj/containers/projector-idea-u
+      volumeMounts:
+        - name: projector-home
+          mountPath: /home/projector-user
+        - name: ssh-key
+          mountPath: "/home/projector-user/.ssh"
+          readOnly: true
+  volumes:
+    - name: ssh-key
+      emptyDir: {}
+    - name: projector-home
+      persistentVolumeClaim:
+        claimName: ide-home
+    - name: github-ssh-key
+      secret:
+        secretName: github-ssh-key
+        items:
+          - key: ssh-privatekey
+            path: id_rsa
+            mode: 0600
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ide-home
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+
+---
+
+# kubectl create secret generic github-ssh-key --type='kubernetes.io/ssh-auth' --from-file=ssh-privatekey=$HOME/.ssh/id_rsa

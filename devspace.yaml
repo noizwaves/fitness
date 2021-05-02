@@ -20,6 +20,7 @@ deployments:
       manifests:
         - kubernetes/postgres.yaml
         - kubernetes/redis.yaml
+        - kubernetes/ide-idea.yaml
   - name: fitness
     kubectl:
       replaceImageTags: true
@@ -29,49 +30,15 @@ deployments:
 dev:
   sync:
   - labelSelector:
-      name: fitness-web
-    containerName: web
-    excludePaths: &exclude-paths
-      - .git/
-      - .gitignore
-      - .devspace
-      - .idea
-      - .tool-versions
-      - cluster
-      - kubernetes
-      - node_modules
-      - tmp
-      - log
-      - public/packs
-      - Dockerfile
-      - docker-compose.yml
-      - devspace.yaml
-    uploadExcludePaths: &upload-exclude-paths
-      - '!log/.keep'
-      - '!tmp/.keep'
-    onUpload: &on-upload
-      restartContainer: false
-      execRemote:
-        onFileChange:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
-        onBatch:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
-  - labelSelector:
-      name: fitness-web
-    containerName: webpack
-    excludePaths: *exclude-paths
-    uploadExcludePaths: *upload-exclude-paths
-    onUpload: *on-upload
-  - labelSelector:
-      name: fitness-sidekiq
-    containerName: sidekiq
-    excludePaths: *exclude-paths
-    uploadExcludePaths: *upload-exclude-paths
-    onUpload: *on-upload
+      name: ide-idea
+    containerName: ide-idea
+    initialSync: preferLocal
+    localSubPath: idea
+    containerPath: /home/projector-user/.config/JetBrains/IntelliJIdea2020.2
+    excludePaths:
+      - '**'
+      - '!/keymaps/'
+      - '!/options/'
   ports:
     - labelSelector:
         name: fitness-web
@@ -83,6 +50,11 @@ dev:
       forward:
         - port: 3035
           remotePort: 3035
+    - labelSelector:
+        name: ide-idea
+      forward:
+        - port: 8887
+          remotePort: 8887
   logs:
     disabled: true
 commands:
