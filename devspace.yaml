@@ -43,6 +43,7 @@ dev:
       - tmp
       - log
       - public/packs
+      - vscode
       - Dockerfile
       - docker-compose.yml
       - devspace.yaml
@@ -72,6 +73,15 @@ dev:
     excludePaths: *exclude-paths
     uploadExcludePaths: *upload-exclude-paths
     onUpload: *on-upload
+  - labelSelector:
+      name: fitness-web
+    containerName: web
+    initialSync: preferLocal
+    localSubPath: vscode/share
+    containerPath: /root/.local/share/code-server
+    excludePaths:
+      - '**'
+      - '!/User/settings.json'
   ports:
     - labelSelector:
         name: fitness-web

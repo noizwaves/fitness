@@ -45,3 +45,6 @@ yarn-debug.log*
 
 # Ignore DevSpace cache and log folder
 .devspace/
+
+# Visual Studio Code configuration
+vscode/
