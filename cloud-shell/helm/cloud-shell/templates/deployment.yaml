@@ -23,8 +23,9 @@ spec:
           command: ["bash", "-c", "trap : TERM INT; sleep infinity & wait"]
           workingDir: "/root"
           volumeMounts:
-            - name: workspace
+            - name: home
               mountPath: /root/workspace
+              subPath: "workspace"
             - name: home
               mountPath: "/root/.local/share/code-server"
               subPath: ".local/share/code-server"
@@ -44,9 +45,6 @@ spec:
               subPath: config.yaml
       dnsPolicy: ClusterFirst
       volumes:
-        - name: workspace
-          persistentVolumeClaim:
-            claimName: workspace
         - name: home
           persistentVolumeClaim:
             claimName: home
