@@ -1,5 +1,7 @@
 /.devspace
+/kubernetes
 
 /.aliases
 /.aliases.template
+/.gitignore
 /devspace.yaml

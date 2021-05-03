@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: cloud-shell
   labels:
-    app: cloud-shell
+    name: cloud-shell
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cloud-shell
+      name: cloud-shell
   template:
     metadata:
       labels:
-        app: cloud-shell
+        name: cloud-shell
     spec:
       initContainers:
     ## not required when running everything as root
