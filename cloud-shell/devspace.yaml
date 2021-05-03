@@ -7,10 +7,20 @@ images:
       buildKit: {}
 deployments:
   - name: cloud-shell
-    kubectl:
-      replaceImageTags: true
-      manifests:
-        - kubernetes/cloud-shell.yaml
+    helm:
+      chart:
+        name: ./helm/cloud-shell
+      values:
+        image: registry.noizwaves.cloud/cloud-shell
+        github_ssh_key: ${GITHUB_SSH_KEY}
+        loft_config: ${LOFT_CONFIG}
+vars:
+  - name: GITHUB_SSH_KEY
+    source: command
+    command: "cat ~/.ssh/id_rsa"
+  - name: LOFT_CONFIG
+    source: command
+    command: "cat ~/.loft/config.json"
 dev:
   sync:
     - containerName: cloud-shell
@@ -18,18 +28,12 @@ dev:
         name: cloud-shell
       initialSync: preferLocal
       containerPath: /root
+      localSubPath: ./home
       excludePaths:
         - '**'
         - '!/.aliases'
-    - containerName: cloud-shell
-      labelSelector:
-        name: cloud-shell
-      initialSync: preferLocal
-      localSubPath: vscode/share
-      containerPath: /root/.local/share/code-server
-      excludePaths:
-        - '**'
-        - '!/User/settings.json'
+        - '!/.gitconfig'
+        - '!/.local/share/code-server/User/settings.json'
   ports:
     - labelSelector:
         name: cloud-shell

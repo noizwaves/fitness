@@ -1,0 +1,3 @@
+apiVersion: v2
+name: cloud-shell
+version: 0.0.1

@@ -1,7 +1,6 @@
 /.devspace
-/kubernetes
+/helm
+/home
 
-/.aliases
-/.aliases.template
 /.gitignore
 /devspace.yaml

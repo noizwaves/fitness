@@ -1,0 +1,3 @@
+image: registry.noizwaves.cloud/cloud-shell
+github_ssh_key: dummy-value
+loft_config: dummy-value
