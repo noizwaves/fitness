@@ -1,85 +1,93 @@
-
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: cloud-shell
   labels:
-    name: cloud-shell
+    app: cloud-shell
 spec:
-  initContainers:
-## not required when running everything as root
-#    - name: load-github-private-key
-#      image: registry.noizwaves.cloud/cloud-shell
-#      command: ["sh", "-c", "cp /root_ssh/* /user_ssh && chown -R 1000:1000 /user_ssh"]
-#      volumeMounts:
-#        - name: github-ssh-key
-#          mountPath: /root_ssh
-#          readOnly: true
-#        - name: ssh-key
-#          mountPath: /user_ssh
-## only required for automatic checkout of repo
-#    - name: git-clone
-#      image: registry.noizwaves.cloud/cloud-shell
-#      command: ["git", "clone", "git@github.com:noizwaves/fitness.git", "/root/workspace/fitness"]
-#      volumeMounts:
-#        - name: workspace
-#          mountPath: /root/workspace
-#        - name: github-ssh-key
-#          mountPath: "/root/.ssh/id_rsa"
-#          subPath: id_rsa
-#          readOnly: true
-#        - name: ssh-known-hosts
-#          mountPath: "/root/.ssh/known_hosts"
-#          subPath: known_hosts
-  containers:
-    - name: cloud-shell
-      image: registry.noizwaves.cloud/cloud-shell
-      command: ["bash", "-c", "while true; do sleep 1; done"]
-      workingDir: "/root"
-      volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-shell
+  template:
+    metadata:
+      labels:
+        app: cloud-shell
+    spec:
+      initContainers:
+    ## not required when running everything as root
+    #    - name: load-github-private-key
+    #      image: registry.noizwaves.cloud/cloud-shell
+    #      command: ["sh", "-c", "cp /root_ssh/* /user_ssh && chown -R 1000:1000 /user_ssh"]
+    #      volumeMounts:
+    #        - name: github-ssh-key
+    #          mountPath: /root_ssh
+    #          readOnly: true
+    #        - name: ssh-key
+    #          mountPath: /user_ssh
+    ## only required for automatic checkout of repo
+    #    - name: git-clone
+    #      image: registry.noizwaves.cloud/cloud-shell
+    #      command: ["git", "clone", "git@github.com:noizwaves/fitness.git", "/root/workspace/fitness"]
+    #      volumeMounts:
+    #        - name: workspace
+    #          mountPath: /root/workspace
+    #        - name: github-ssh-key
+    #          mountPath: "/root/.ssh/id_rsa"
+    #          subPath: id_rsa
+    #          readOnly: true
+    #        - name: ssh-known-hosts
+    #          mountPath: "/root/.ssh/known_hosts"
+    #          subPath: known_hosts
+      containers:
+        - name: cloud-shell
+          image: registry.noizwaves.cloud/cloud-shell
+          command: ["bash", "-c", "while true; do sleep 1; done"]
+          workingDir: "/root"
+          volumeMounts:
+            - name: workspace
+              mountPath: /root/workspace
+            - name: github-ssh-key
+              mountPath: "/root/.ssh/id_rsa"
+              subPath: id_rsa
+              readOnly: true
+            - name: loft-config
+              mountPath: "/root/.loft/config.json"
+              subPath: config.json
+              readOnly: true
+            - name: ssh-known-hosts
+              mountPath: "/root/.ssh/known_hosts"
+              subPath: known_hosts
+              readOnly: false
+            - name: git-config
+              mountPath: "/root/.gitconfig"
+              subPath: .gitconfig
+              readOnly: false
+      dnsPolicy: ClusterFirst
+      volumes:
         - name: workspace
-          mountPath: /root/workspace
+          persistentVolumeClaim:
+            claimName: workspace
         - name: github-ssh-key
-          mountPath: "/root/.ssh/id_rsa"
-          subPath: id_rsa
-          readOnly: true
+          secret:
+            secretName: github-ssh-key
+            items:
+              - key: ssh-privatekey
+                path: id_rsa
+                mode: 0600
         - name: loft-config
-          mountPath: "/root/.loft/config.json"
-          subPath: config.json
-          readOnly: true
+          secret:
+            secretName: loft-config
+            items:
+              - key: config.json
+                path: config.json
+                mode: 0600
         - name: ssh-known-hosts
-          mountPath: "/root/.ssh/known_hosts"
-          subPath: known_hosts
-          readOnly: false
+          configMap:
+            name: ssh-known-hosts
         - name: git-config
-          mountPath: "/root/.gitconfig"
-          subPath: .gitconfig
-          readOnly: false
-  dnsPolicy: ClusterFirst
-  volumes:
-    - name: workspace
-      persistentVolumeClaim:
-        claimName: workspace
-    - name: github-ssh-key
-      secret:
-        secretName: github-ssh-key
-        items:
-          - key: ssh-privatekey
-            path: id_rsa
-            mode: 0600
-    - name: loft-config
-      secret:
-        secretName: loft-config
-        items:
-          - key: config.json
-            path: config.json
-            mode: 0600
-    - name: ssh-known-hosts
-      configMap:
-        name: ssh-known-hosts
-    - name: git-config
-      configMap:
-        name: git-config
+          configMap:
+            name: git-config
 
 ---
 
