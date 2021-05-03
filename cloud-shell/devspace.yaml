@@ -19,6 +19,12 @@ dev:
       containerPath: /root
       excludePaths:
         - '**'
-        - '!.aliases'
+        - '!/.aliases'
+#  ports:
+#    - labelSelector:
+#        name: cloud-shell
+#      forward:
+#        - port: 8080
+#          remotePort: 8080
   logs:
     disabled: true

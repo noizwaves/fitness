@@ -34,7 +34,7 @@ spec:
   containers:
     - name: cloud-shell
       image: registry.noizwaves.cloud/cloud-shell
-      command: ["bash", "-c", "sleep 999999"]
+      command: ["bash", "-c", "while true; do sleep 1; done"]
       workingDir: "/root"
       volumeMounts:
         - name: workspace
@@ -42,6 +42,10 @@ spec:
         - name: github-ssh-key
           mountPath: "/root/.ssh/id_rsa"
           subPath: id_rsa
+          readOnly: true
+        - name: loft-config
+          mountPath: "/root/.loft/config.json"
+          subPath: config.json
           readOnly: true
         - name: ssh-known-hosts
           mountPath: "/root/.ssh/known_hosts"
@@ -62,6 +66,13 @@ spec:
         items:
           - key: ssh-privatekey
             path: id_rsa
+            mode: 0600
+    - name: loft-config
+      secret:
+        secretName: loft-config
+        items:
+          - key: config.json
+            path: config.json
             mode: 0600
     - name: ssh-known-hosts
       configMap:
@@ -90,3 +101,5 @@ spec:
 # kubectl create configmap ssh-known-hosts --from-file=$HOME/.ssh/known_hosts
 
 # kubectl create configmap git-config --from-file=$HOME/.gitconfig
+
+# kubectl create secret generic loft-config --from-file=$HOME/.loft/config.json

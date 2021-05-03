@@ -9,11 +9,19 @@ RUN apk add \
         openssh \
         vim
 
+# buildx CLI
+RUN curl -fsOL https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64 && \
+    chmod +x buildx-v0.5.1.linux-amd64 && \
+    mv buildx-v0.5.1.linux-amd64 /usr/local/bin/buildx
+
 # devspace CLI + loft plugin
 RUN curl -fsOL https://github.com/loft-sh/devspace/releases/download/v5.12.1/devspace-linux-amd64 && \
     chmod +x devspace-linux-amd64 && \
     mv devspace-linux-amd64 /usr/local/bin/devspace && \
     devspace add plugin https://github.com/loft-sh/loft-devspace-plugin
+
+# Visual Studio Code
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # gh CLI
 #RUN curl -fsOL https://github.com/cli/cli/releases/download/v1.9.2/gh_1.9.2_linux_amd64.tar.gz && \
