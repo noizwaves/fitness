@@ -19,7 +19,8 @@ spec:
       containers:
         - name: cloud-shell
           image: {{ .Values.image }}
-          command: ["bash", "-c", "while true; do sleep 1; done"]
+          # Sleep command that reacts to termination requests: https://stackoverflow.com/a/35770783
+          command: ["bash", "-c", "trap : TERM INT; sleep infinity & wait"]
           workingDir: "/root"
           volumeMounts:
             - name: workspace
