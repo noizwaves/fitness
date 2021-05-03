@@ -21,6 +21,15 @@ dev:
       excludePaths:
         - '**'
         - '!/.aliases'
+    - containerName: cloud-shell
+      labelSelector:
+        name: cloud-shell
+      initialSync: preferLocal
+      localSubPath: vscode/share
+      containerPath: /root/.local/share/code-server
+      excludePaths:
+        - '**'
+        - '!/User/settings.json'
   ports:
     - labelSelector:
         name: cloud-shell

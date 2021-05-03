@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y \
         bash \
         curl \
         openssh-client \
-        vim
+        vim \
+        procps
 
 # buildx CLI
 RUN curl -fsOL https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64 && \
