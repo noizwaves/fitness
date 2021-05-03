@@ -63,6 +63,9 @@ spec:
               mountPath: "/root/.gitconfig"
               subPath: .gitconfig
               readOnly: false
+            - name: code-server-config
+              mountPath: "/root/.config/code-server/config.yaml"
+              subPath: config.yaml
       dnsPolicy: ClusterFirst
       volumes:
         - name: workspace
@@ -88,6 +91,9 @@ spec:
         - name: git-config
           configMap:
             name: git-config
+        - name: code-server-config
+          configMap:
+            name: code-server-config
 
 ---
 
@@ -101,6 +107,18 @@ spec:
       storage: 10Gi
   accessModes:
     - ReadWriteOnce
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: code-server-config
+data:
+  config.yaml: |+
+    bind-addr: 127.0.0.1:8080
+    auth: none
+    cert: false
 
 ---
 

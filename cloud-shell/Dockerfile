@@ -1,12 +1,10 @@
-FROM alpine
+FROM debian:buster
 
-RUN apk add \
+RUN apt-get update && apt-get install -y \
         git \
         bash \
-        # for `git add -p`
-        git-perl \
         curl \
-        openssh \
+        openssh-client \
         vim
 
 # buildx CLI
