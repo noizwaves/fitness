@@ -1,0 +1,24 @@
+version: v1beta9
+images:
+  cloud-shell:
+    image: registry.noizwaves.cloud/cloud-shell
+    build:
+      buildKit: {}
+deployments:
+  - name: cloud-shell
+    kubectl:
+      replaceImageTags: true
+      manifests:
+        - kubernetes/cloud-shell.yaml
+dev:
+  sync:
+    - containerName: cloud-shell
+      labelSelector:
+        name: cloud-shell
+      initialSync: preferLocal
+      containerPath: /root
+      excludePaths:
+        - '**'
+        - '!.aliases'
+  logs:
+    disabled: true
