@@ -40,5 +40,15 @@ dev:
       forward:
         - port: 8080
           remotePort: 8080
+    - labelSelector:
+        name: cloud-shell
+      forward:
+        - port: 3000
+          remotePort: 3000
+    - labelSelector:
+        name: cloud-shell
+      forward:
+        - port: 3035
+          remotePort: 3035
   logs:
     disabled: true
