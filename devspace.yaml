@@ -8,6 +8,7 @@ images:
     build:
       buildKit:
         inCluster: {}
+        command: [buildx]
         args:
           - --cache-to
           - type=registry,ref=registry.noizwaves.cloud/fitness-cache
@@ -93,11 +94,6 @@ dev:
       forward:
         - port: 3035
           remotePort: 3035
-    - labelSelector:
-        name: fitness-web
-      forward:
-        - port: 8080
-          remotePort: 8080
   logs:
     disabled: true
 commands:

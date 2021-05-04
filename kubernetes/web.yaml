@@ -21,14 +21,9 @@ spec:
       - name: REDIS_URL
         value: redis://redis:6379/0
     volumeMounts:
-      - name: fitness-packs
-        mountPath: /app/public/packs
-      - name: vscode
-        mountPath: "/root/.config/code-server"
-        subPath: "config"
-      - name: vscode
-        mountPath: "/root/.local/share/code-server"
-        subPath: "local/share"
+      - name: home
+        mountPath: /app
+        subPath: workspace/fitness
   - name: webpack
     image: registry.noizwaves.cloud/fitness
     stdin: true
@@ -41,24 +36,10 @@ spec:
       - name: REDIS_URL
         value: redis://redis:6379/0
     volumeMounts:
-      - name: fitness-packs
-        mountPath: /app/public/packs
+      - name: home
+        mountPath: /app
+        subPath: workspace/fitness
   volumes:
-    - name: fitness-packs
-      emptyDir: {}
-    - name: vscode
+    - name: home
       persistentVolumeClaim:
-        claimName: ide-vscode
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ide-vscode
-spec:
-  resources:
-    requests:
-      storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
+        claimName: home
