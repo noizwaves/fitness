@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/tmp/.bundle_cache \
 
 
 FROM base as node_modules
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock .npmrc .yarnrc /app/
 RUN --mount=type=cache,target=/tmp/.yarn_cache \
   mkdir -p /usr/local/share/.cache/yarn && \
   yarn install --cache-folder /tmp/.yarn_cache && \
@@ -35,7 +35,7 @@ RUN --mount=type=cache,target=/tmp/.yarn_cache \
 
 FROM base as final
 COPY --from=gems /usr/local/bundle /usr/local/bundle
-COPY --from=node_modules /app/node_modules /app/node_modules
+COPY --from=node_modules /node_modules /node_modules
 COPY --from=node_modules /usr/local/share/.cache/yarn/v6 /usr/local/share/.cache/yarn/v6
 
 COPY . /app
