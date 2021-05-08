@@ -24,6 +24,9 @@ spec:
       - name: home
         mountPath: /app
         subPath: workspace/fitness
+      - name: home
+        mountPath: /root/.vscode-server
+        subPath: .vscode-server-fitness-web
   - name: webpack
     image: registry.noizwaves.cloud/fitness
     stdin: true
