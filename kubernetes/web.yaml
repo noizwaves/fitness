@@ -22,7 +22,7 @@ spec:
         value: redis://redis:6379/0
     volumeMounts:
       - name: home
-        mountPath: /app
+        mountPath: /home/fitness/app
         subPath: workspace/fitness
       - name: home
         mountPath: /root/.vscode-server
@@ -40,7 +40,7 @@ spec:
         value: redis://redis:6379/0
     volumeMounts:
       - name: home
-        mountPath: /app
+        mountPath: /home/fitness/app
         subPath: workspace/fitness
   volumes:
     - name: home
