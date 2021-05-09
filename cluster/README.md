@@ -94,7 +94,8 @@ We need to ensure that the local network DNS server is the only server used.
       --repo https://charts.devspace.sh/ \
       --namespace loft \
       --reuse-values \
-      -f cluster/loft/values.yaml
+      --values cluster/loft/values.yaml \
+      --set 'certIssuer.resolvers[0].dns01.cloudflare.email'=${CLOUDFLARE_EMAIL}
     ```
 
 ### 6. Install Zerotier

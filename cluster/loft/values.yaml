@@ -6,7 +6,6 @@ certIssuer:
   resolvers:
     - dns01:
         cloudflare:
-          email: cloudflare@noizwaves.cloud
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
