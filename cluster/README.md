@@ -96,3 +96,16 @@ We need to ensure that the local network DNS server is the only server used.
       --reuse-values \
       -f cluster/loft/values.yaml
     ```
+
+### 6. Install Zerotier
+
+1.  `$ git clone git@github.com:leunamnauj/kubernetes-zerotier-bridge.git ~/workspace/kubernetes-zerotier-bridge`
+1.  Create a `values.yaml` file by:
+    1.  `$ cp cluster/zerotier/values.yaml.template cluster/zerotier/values.yaml`
+    1.  Replace the placeholders with real values
+1.  Install kubernetes-zerotier-bridge by running:
+    ```
+    $ helm install kubernetes-zerotier-bridge \
+      ~/workspace/kubernetes-zerotier-bridge/charts/kubernetes-zerotier-bridge \
+      -f cluster/zerotier/values.yaml
+    ```

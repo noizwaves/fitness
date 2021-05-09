@@ -45,3 +45,5 @@ yarn-debug.log*
 
 # Ignore DevSpace cache and log folder
 .devspace/
+
+/cluster/zerotier/values.yaml

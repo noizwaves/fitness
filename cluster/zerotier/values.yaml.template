@@ -1,0 +1,11 @@
+environment: kubernetes
+
+zerotier_config:
+  zerotier_network_id: "<ZEROTIER_NETWORK_ID>"
+  zerotier_network_name: "<ZEROTIER_NETWORK_NAME>"
+  zerotier_api_accesstoken: "<ZEROTIER_API_ACCESSTOKEN>"
+  zerotier_authorize_member: true
+  zerotier_label_service: "zerotier"
+
+persistentVolume:
+  enabled: true
