@@ -86,7 +86,7 @@ We need to ensure that the local network DNS server is the only server used.
     ```
     $ kubectl create secret generic cloudflare-api-token-secret \
       --from-literal=api-token=${CLOUDFLARE_API_TOKEN} \
-      --namespace loft
+      --namespace cert-manager
     ```
 1.  Enable cert-issuer and ingress via:
     ```
