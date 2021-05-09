@@ -45,7 +45,7 @@ COPY --chown=fitness:fitness . /home/fitness/app
 
 # Add a script to be executed every time the container starts.
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["/home/fitness/app/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
