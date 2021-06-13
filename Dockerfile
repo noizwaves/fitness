@@ -34,6 +34,10 @@ RUN --mount=type=cache,target=/tmp/.yarn_cache \
 
 
 FROM base as final
+RUN echo "if [[ -f /app/.aliases ]]; then" >> /root/.bashrc && \
+    echo "  . /app/.aliases" >> /root/.bashrc && \
+    echo "fi" >> /root/.bashrc
+
 COPY --from=gems /usr/local/bundle /usr/local/bundle
 COPY --from=node_modules /app/node_modules /app/node_modules
 COPY --from=node_modules /usr/local/share/.cache/yarn/v6 /usr/local/share/.cache/yarn/v6

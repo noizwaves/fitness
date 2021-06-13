@@ -31,7 +31,7 @@
     1.  `$ curl -s -L "https://github.com/devspace-cloud/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace;`
     1.  `$ sudo mv devspace /usr/local/bin;`
 1.  `$ minikube start`
-1.  Run `$ devspace dev` to start development mode
+1.  Run `$ devspace dev -p local` to start development mode
 1.  [fitness app](http://localhost:3000) will open automatically in browser
 1.  Make code changes
 1.  Refresh browser
@@ -58,6 +58,15 @@ Gemfile changes will automatically sync back locally:
 [0:sync:app] Downstream - Successfully processed 2 change(s)
 ```
 
+#### Customizing the shell (prompt, aliases, functions, etc)
+
+If you don't have an aliases file already, start by copying the template:
+1.  `$ cp .aliases.template .aliases`
+1.  Enter a pod to see the customizations
+1.  Edit `.aliases` as desired
+1.  Reload aliases by running `. .aliases` to see immediate effects
+1.  Repeat as often as required by going to step 3
+
 #### Running tests
 1.  In another terminal, run `$ devspace run rails-test`
 
@@ -68,6 +77,7 @@ Gemfile changes will automatically sync back locally:
 1.  Install Loft plugin via `$ devspace add plugin https://github.com/loft-sh/loft-devspace-plugin`
 1.  Follow [instructions](./cluster/README.md) to install Loft onto a minikube-based k8s cluster
 1.  Log into Loft via `$ devspace login https://loft.noizwaves.cloud`
+1.  Run `$ devspace dev` to start development mode
 1.  [fitness app](http://localhost:3000) will open automatically in browser
 1.  _"Do development"_
     1.  Make source code changes

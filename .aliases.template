@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function get_project_directory () {
+  pwd | awk '{ gsub("/app/?", "./") ; print }'
+}
+
+export PS1="\[\033[36m\](DevSpace)\[\033[00m\] \$(get_project_directory) \$ "
