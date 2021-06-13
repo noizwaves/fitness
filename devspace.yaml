@@ -4,6 +4,7 @@ images:
     image: registry.noizwaves.cloud/fitness
     rebuildStrategy: ignoreContextChanges
     injectRestartHelper: true
+    restartHelperPath: bin/devspace-restart-helper.sh
     build:
       buildKit:
         inCluster: {}

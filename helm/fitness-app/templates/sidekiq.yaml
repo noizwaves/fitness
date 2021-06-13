@@ -26,3 +26,7 @@ spec:
             value: postgres
           - name: REDIS_URL
             value: redis://redis:6379/0
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "/bin/sh", "-c", "touch /.devspace/terminated" ]

@@ -32,6 +32,10 @@ spec:
         volumeMounts:
           - name: fitness-packs
             mountPath: /app/public/packs
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "/bin/sh", "-c", "touch /.devspace/terminated" ]
       - name: webpack
         image: {{ .Values.image }}
         stdin: true
@@ -46,6 +50,10 @@ spec:
         volumeMounts:
           - name: fitness-packs
             mountPath: /app/public/packs
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "/bin/sh", "-c", "touch /.devspace/terminated" ]
       volumes:
         - name: fitness-packs
           emptyDir: {}
