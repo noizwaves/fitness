@@ -100,3 +100,4 @@ profiles:
             inCluster: null
             skipPush: true
             preferMinikube: true
+            args: []
