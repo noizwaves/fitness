@@ -10,7 +10,7 @@ spec:
     image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
-    command:
+    args:
      - 'bin/sidekiq'
     env:
       - name: DB_HOST

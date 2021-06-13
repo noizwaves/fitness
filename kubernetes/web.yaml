@@ -10,7 +10,7 @@ spec:
     image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
-    command:
+    args:
       - './bin/rails'
       - 'server'
       - '-b'
@@ -27,7 +27,7 @@ spec:
     image: registry.noizwaves.cloud/fitness
     stdin: true
     tty: true
-    command:
+    args:
       - './bin/webpack-dev-server'
     env:
       - name: DB_HOST
