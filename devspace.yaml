@@ -54,10 +54,6 @@ dev:
     onUpload: &on-upload
       restartContainer: false
       execRemote:
-        onFileChange:
-          command: bash
-          args:
-            - /app/bin/install_dependencies.sh
         onBatch:
           command: bash
           args:
