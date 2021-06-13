@@ -67,6 +67,9 @@ If you don't have an aliases file already, start by copying the template:
 1.  Reload aliases by running `. .aliases` to see immediate effects
 1.  Repeat as often as required by going to step 3
 
+If you do have an aliases file, simply symlink it into the working directory:
+1.  `$ ln -s ~/.cloud-dotfiles/.aliases ./.aliases`
+
 #### Running tests
 1.  In another terminal, run `$ devspace run rails-test`
 

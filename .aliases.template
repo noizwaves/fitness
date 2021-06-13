@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+function reload () {
+  source /app/.aliases
+}
+
+alias r="reload"
+
 function get_project_directory () {
   pwd | awk '{ gsub("/app/?", "./") ; print }'
 }
