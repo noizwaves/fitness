@@ -40,9 +40,13 @@
 1.  Run `$ devspace purge` to clean up resources
 
 #### Debugging
-1.  In another terminal, run `$ devspace attach -c fitness-web`
-1.  Interact with debugger
-1.  Detach by <kbd>Ctrl+P,Q</kbd>
+1.  Add breakpoint to code by pasting this snippet: `binding.remote_pry`
+1.  Trigger code execution in browser
+1.  In another terminal:
+    1.  Run `$ devspace enter -c fitness-web`
+    1.  Then run `$ pry-remote`
+1.  Interact with debugger in terminal window
+1.  When debugging session finishes, `pry-remote` will exit
 
 #### Installing a Gem
 1.  In another terminal, run `$ devspace enter -c fitness-web -- bundle add <gem-name>`
