@@ -29,7 +29,7 @@ deployments:
 dev:
   sync:
   - labelSelector:
-      name: fitness-web
+      app: fitness-web
     containerName: web
     excludePaths: &exclude-paths
       - .git/
@@ -62,25 +62,25 @@ dev:
           args:
             - /app/bin/install_dependencies.sh
   - labelSelector:
-      name: fitness-web
+      app: fitness-web
     containerName: webpack
     excludePaths: *exclude-paths
     uploadExcludePaths: *upload-exclude-paths
     onUpload: *on-upload
   - labelSelector:
-      name: fitness-sidekiq
+      app: fitness-sidekiq
     containerName: sidekiq
     excludePaths: *exclude-paths
     uploadExcludePaths: *upload-exclude-paths
     onUpload: *on-upload
   ports:
     - labelSelector:
-        name: fitness-web
+        app: fitness-web
       forward:
         - port: 3000
           remotePort: 3000
     - labelSelector:
-        name: fitness-web
+        app: fitness-web
       forward:
         - port: 3035
           remotePort: 3035

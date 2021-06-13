@@ -1,19 +1,28 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: fitness-sidekiq
   labels:
-    name: fitness-sidekiq
+    app: fitness-sidekiq
 spec:
-  containers:
-  - name: sidekiq
-    image: {{ .Values.image }}
-    stdin: true
-    tty: true
-    args:
-     - 'bin/sidekiq'
-    env:
-      - name: DB_HOST
-        value: postgres
-      - name: REDIS_URL
-        value: redis://redis:6379/0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fitness-sidekiq
+  template:
+    metadata:
+      labels:
+        app: fitness-sidekiq
+    spec:
+      containers:
+      - name: sidekiq
+        image: {{ .Values.image }}
+        stdin: true
+        tty: true
+        args:
+         - 'bin/sidekiq'
+        env:
+          - name: DB_HOST
+            value: postgres
+          - name: REDIS_URL
+            value: redis://redis:6379/0
