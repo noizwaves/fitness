@@ -18,6 +18,9 @@ docker-compose.yml
 .tool-versions
 .idea
 
+# IDE: Visual Studio Code
+.vscode/
+
 # Ignore devspace.yaml file to prevent image rebuilding after config changes
 devspace.yaml
 

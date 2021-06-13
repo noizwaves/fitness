@@ -37,6 +37,7 @@ dev:
       - .devspace
       - .idea
       - .tool-versions
+      - .vscode/
       - cluster
       - kubernetes
       - node_modules
