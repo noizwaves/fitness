@@ -15,17 +15,17 @@ images:
           - type=registry,ref=registry.noizwaves.cloud/fitness-cache
 deployments:
   - name: fitness-dependencies
-    kubectl:
+    helm:
+      chart:
+        name: ./helm/fitness-dependencies
       replaceImageTags: false
-      manifests:
-        - kubernetes/postgres.yaml
-        - kubernetes/redis.yaml
-  - name: fitness
-    kubectl:
+  - name: fitness-app
+    helm:
+      chart:
+        name: ./helm/fitness-app
       replaceImageTags: true
-      manifests:
-        - kubernetes/web.yaml
-        - kubernetes/sidekiq.yaml
+      values:
+        image: registry.noizwaves.cloud/fitness
 dev:
   sync:
   - labelSelector:
@@ -39,7 +39,7 @@ dev:
       - .tool-versions
       - .vscode/
       - cluster
-      - kubernetes
+      - helm
       - node_modules
       - tmp
       - log
