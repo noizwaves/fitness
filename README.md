@@ -36,7 +36,7 @@
 1.  Make code changes
 1.  Refresh browser
 1.  Repeat (change, refresh, etc)
-1.  In the terminal window, run <kbd>Ctrl+C,Q</kbd> to stop development mode
+1.  In the terminal window, press <kbd>Ctrl+C</kbd> to stop development mode
 1.  Run `$ devspace purge` to clean up resources
 
 #### Debugging
