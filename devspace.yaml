@@ -89,9 +89,9 @@ dev:
     disabled: true
 commands:
   - name: db-setup
-    command: devspace enter --pod fitness-web --container web -- bin/rails db:setup
+    command: devspace enter --container web -- bin/rails db:setup
   - name: rails-test
-    command: devspace enter --pod fitness-web --container web -- bin/rails test
+    command: devspace enter --container web -- bin/rails test
 profiles:
 - name: local
   merge:
