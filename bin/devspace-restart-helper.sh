@@ -8,7 +8,7 @@ pid=""
 trap quit TERM INT
 quit() {
   if [ -n "$pid" ]; then
-    kill $pid
+    kill "$pid"
   fi
 }
 while true; do
