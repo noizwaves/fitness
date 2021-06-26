@@ -16,8 +16,10 @@ while true; do
   pid=$!
   echo "$pid" > /.devspace/devspace-pid
   set +e
-  fg
-  exit_code=$?
+  while kill -s 0 "$pid" > /dev/null 2>&1; do
+    fg
+    exit_code=$?
+  done
   if [ -f /.devspace/terminated ]; then
     printf "\n\n############### Pod terminating, exiting ###############\n\nn"
     exit 0
