@@ -50,3 +50,9 @@ yarn-debug.log*
 
 # Ignore DevSpace cache and log folder
 .devspace/
+
+# Ignore the postgres state
+postgres/
+
+# Ignore the redis state
+dump.rdb
