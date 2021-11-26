@@ -145,6 +145,16 @@ If you do have an aliases file, simply symlink it into the working directory:
     1.  `$ bin/sidekiq`
     1.  `$ bin/webpack-dev-server`
 
+### Local development (Nix + Docker)
+1.  `$ docker build -t nixshell -f nix.Dockerfile .`
+1.  `$ docker run --rm --user 1000:1000 -p 3000:3000 -v $(pwd):/app -w /app -it nixshell nix-shell`
+1.  Orchestrate services with tmux panes
+    1.  `$ redis-server`
+    1.  `$ postgres -k $PGHOST`
+    1.  `$ bin/rails s -b 0.0.0.0`
+    1.  `$ bin/sidekiq`
+    1.  `$ bin/webpack-dev-server`
+
 
 ## Useful resources
 
