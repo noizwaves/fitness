@@ -130,7 +130,7 @@ If you do have an aliases file, simply symlink it into the working directory:
 1.  Install gem via `$ bundle add <gem-name>`
 
 ### Local development (Nix)
-1.  [Install](https://wiki.archlinux.org/title/Nix#Installation) and [configure](https://wiki.archlinux.org/title/Nix#Configuration) Nix with the `nixpkgs-unstable` channel
+1.  [Install](https://wiki.archlinux.org/title/Nix#Installation) and [configure](https://wiki.archlinux.org/title/Nix#Configuration) Nix with the `nixpkgs-21.05` channel
 1.  Enter a nix shell by running `$ nix-shell`
 1.  Install application dependencies
     1.  `$ bundle install`
