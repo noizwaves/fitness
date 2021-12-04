@@ -41,5 +41,9 @@ stdenv.mkDerivation {
     fi
 
     export DB_USERNAME=adam
+
+    # Fix sassc build on darwin+nix
+    # https://github.com/sass/sassc-ruby/issues/148#issuecomment-644450274
+    bundle config --local build.sassc --disable-lto
   '';
 }
