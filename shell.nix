@@ -5,6 +5,7 @@ pkgs.mkShell {
 
   nativeBuildInputs = [
     stdenv
+    zlib
 
     (pkgs.callPackage ./ruby_2-7-3.nix {})
 
