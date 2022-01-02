@@ -1,9 +1,9 @@
 with import <nixpkgs> {};
 
-stdenv.mkDerivation {
+pkgs.mkShell {
   name = "fitness";
 
-  buildInputs = [
+  nativeBuildInputs = [
     stdenv
 
     (pkgs.callPackage ./ruby_2-7-3.nix {})
