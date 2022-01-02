@@ -131,7 +131,12 @@ If you do have an aliases file, simply symlink it into the working directory:
 
 ### Local development (Nix)
 1.  [Install](https://wiki.archlinux.org/title/Nix#Installation) and [configure](https://wiki.archlinux.org/title/Nix#Configuration) Nix with the `nixpkgs-21.05` channel
-1.  Enter a nix shell by running `$ nix-shell`
+1.  Enter a nix environment by either:
+    -   Manually running `$ nix-shell`
+    -   Using direnv and [nix-direnv](https://github.com/nix-community/nix-direnv) to activate the environment:
+        1. Install direnv and nix-direnv
+        1. `echo "use nix" >> .envrc`
+        1. `direnv allow`
 1.  Install application dependencies
     1.  `$ bundle install`
     1.  `$ yarn install`
