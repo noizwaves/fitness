@@ -134,9 +134,9 @@ If you do have an aliases file, simply symlink it into the working directory:
 1.  Enter a nix environment by either:
     -   Manually running `$ nix-shell`
     -   Using direnv and [nix-direnv](https://github.com/nix-community/nix-direnv) to activate the environment:
-        1. Install direnv and nix-direnv
-        1. `echo "use nix" >> .envrc`
-        1. `direnv allow`
+        1.  install direnv and nix-direnv
+        1.  `echo "use nix" >> .envrc`
+        1.  `direnv allow`
 1.  Install application dependencies
     1.  `$ bundle install`
     1.  `$ yarn install`
