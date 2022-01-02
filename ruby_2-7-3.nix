@@ -27,7 +27,7 @@ pkgs.stdenv.mkDerivation {
   ];
 
   unpackPhase = ''
-    tar xfz $src -C /build
+    tar xfz $src
   '';
 
   configurePhase = ''
