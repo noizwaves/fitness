@@ -1,5 +1,7 @@
 with import <nixpkgs> {};
-
+let
+  ruby = pkgs.callPackage ./ruby_2-7-3.nix {};
+in
 pkgs.mkShell {
   name = "fitness";
 
@@ -7,7 +9,7 @@ pkgs.mkShell {
     stdenv
     zlib
 
-    (pkgs.callPackage ./ruby_2-7-3.nix {})
+    ruby
 
     nodejs-14_x
     yarn
@@ -22,6 +24,11 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
+    # TODO: this setup probably belongs in the ruby package
+    mkdir -p "$(pwd)/.gem"
+    export GEM_HOME="$(pwd)/.gem/ruby/2.7.0"
+    export GEM_PATH="''${GEM_HOME}:${ruby}/lib/ruby/gems/2.7.0"
+
     export PGHOST=$(pwd)/postgres
     export PGDATA=$PGHOST/data
     export PGLOG=$PGHOST/postgres.log

@@ -56,3 +56,6 @@ postgres/
 
 # Ignore the redis state
 dump.rdb
+
+# Ignore installed gems
+/.gem/
